@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LHASA 2027</title>
+<meta name="description" content="LHASA: Scaling Long-Horizon Agentic AI Systems for Scientific Discovery — a workshop at SupercomputingAsia 2027, Singapore.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: fixed left rail of section markers on desktop; single measured column of content. */
+:root{
+  --bg:#f7f6f3;
+  --surface:#ffffff;
+  --fg:#16181d;
+  --muted:#5c6069;
+  --rule:#d9d7d0;
+  --accent:#9a3412;
+  --accent-soft:#f0e3dc;
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#121317;
+    --surface:#1a1c21;
+    --fg:#eceae5;
+    --muted:#a0a4ac;
+    --rule:#2e3138;
+    --accent:#f08c5a;
+    --accent-soft:#2a1f1a;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121317;
+  --surface:#1a1c21;
+  --fg:#eceae5;
+  --muted:#a0a4ac;
+  --rule:#2e3138;
+  --accent:#f08c5a;
+  --accent-soft:#2a1f1a;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{
+  max-width:1120px;
+  margin:0 auto;
+  padding-left:max(20px,env(safe-area-inset-left,0px));
+  padding-right:max(20px,env(safe-area-inset-right,0px));
+}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* ---- header ---- */
+header.site{
+  border-bottom:1px solid var(--rule);
+  background:var(--surface);
+}
+.bar{
+  display:flex;flex-wrap:wrap;gap:12px 24px;
+  align-items:baseline;justify-content:space-between;
+  padding-block:14px;
+}
+.mark{font-family:var(--display);font-weight:700;letter-spacing:.02em;font-size:1.05rem}
+nav.top{display:flex;flex-wrap:wrap;gap:16px;font-family:var(--mono);font-size:.78rem}
+nav.top a{color:var(--muted);text-decoration:none}
+nav.top a:hover{color:var(--accent)}
+
+/* ---- hero ---- */
+.hero{padding-block:56px 44px;border-bottom:1px solid var(--rule)}
+.hero h1{
+  font-size:clamp(2.1rem,6.2vw,4.1rem);
+  font-weight:700;
+  line-height:1.03;
+  letter-spacing:-.025em;
+  margin-top:14px;
+  max-width:16ch;
+}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{font-size:1.18rem;max-width:62ch;margin-top:22px;color:var(--fg)}
+.facts{
+  display:flex;flex-wrap:wrap;gap:10px;
+  margin-top:28px;
+  font-family:var(--mono);font-size:.8rem;
+}
+.facts span{
+  border:1px solid var(--rule);
+  background:var(--surface);
+  padding:7px 12px;
+}
+.facts span.hot{border-color:var(--accent);color:var(--accent)}
+
+/* ---- sections ---- */
+section{padding-block:48px;border-bottom:1px solid var(--rule)}
+.sec-head{display:flex;gap:14px;align-items:baseline;margin-bottom:22px}
+.sec-head h2{font-size:1.45rem;font-weight:600;letter-spacing:-.01em}
+.prose{max-width:66ch}
+.prose p{margin:0 0 18px}
+.prose p:last-child{margin-bottom:0}
+
+/* ---- topics ---- */
+.topics{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(248px,1fr));
+  gap:1px;
+  background:var(--rule);
+  border:1px solid var(--rule);
+}
+.topic{background:var(--surface);padding:20px;min-width:0}
+.topic h3{font-size:.95rem;font-weight:600;margin-bottom:6px}
+.topic p{margin:0;font-size:.94rem;color:var(--muted)}
+
+/* ---- dates ---- */
+.dates{border-top:1px solid var(--rule);max-width:70ch}
+.date-row{
+  display:grid;
+  grid-template-columns:11rem 1fr;
+  gap:4px 20px;
+  padding-block:14px;
+  border-bottom:1px solid var(--rule);
+  align-items:baseline;
+}
+.date-row time{font-family:var(--mono);font-size:.86rem;font-variant-numeric:tabular-nums;color:var(--accent)}
+.date-row .what{font-size:1rem}
+.date-row .note{grid-column:1/-1;font-size:.86rem;color:var(--muted)}
+@media (max-width:560px){.date-row{grid-template-columns:1fr}}
+
+/* ---- program ---- */
+.program{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);max-width:70ch}
+.slot{background:var(--surface);padding:16px 20px;display:grid;grid-template-columns:2.2rem 1fr;gap:16px;min-width:0}
+.slot .n{font-family:var(--mono);font-size:.8rem;color:var(--muted);padding-top:3px}
+.slot h3{font-size:1rem;font-weight:600;margin-bottom:4px}
+.slot p{margin:0;font-size:.94rem;color:var(--muted)}
+
+/* ---- people ---- */
+.people{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:26px}
+.person{min-width:0}
+.person h3{font-size:1.02rem;font-weight:600}
+.person .aff{font-family:var(--mono);font-size:.76rem;color:var(--accent);margin:4px 0 10px;letter-spacing:.02em}
+.person p{margin:0;font-size:.95rem;color:var(--muted)}
+.pc-list{max-width:70ch}
+.pc-list ul{list-style:none;padding:0;margin:0 0 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px 24px}
+.pc-list li{font-size:.96rem;border-left:2px solid var(--accent-soft);padding-left:12px}
+.pc-list li span{display:block;font-family:var(--mono);font-size:.74rem;color:var(--muted)}
+
+/* ---- contact ---- */
+.contact{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:18px}
+.mailbox{
+  font-family:var(--mono);font-size:.9rem;
+  background:var(--surface);border:1px solid var(--rule);
+  padding:10px 14px;user-select:all;
+}
+button.copy{
+  font-family:var(--mono);font-size:.8rem;
+  background:var(--accent);color:var(--bg);
+  border:0;padding:11px 16px;cursor:pointer;
+}
+button.copy:hover{opacity:.9}
+
+footer{padding-block:34px;font-size:.86rem;color:var(--muted)}
+footer p{margin:0 0 8px}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap bar">
+    <span class="mark">LHASA&nbsp;2027</span>
+    <nav class="top">
+      <a href="#about">Scope</a>
+      <a href="#topics">Topics</a>
+      <a href="#submit">Submissions</a>
+      <a href="#program">Program</a>
+      <a href="#organizers">Organizers</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap hero">
+  <p class="eyebrow">Workshop at SupercomputingAsia 2027 · Singapore</p>
+  <h1>Scaling Long-Horizon <em>Agentic AI</em> Systems for Scientific Discovery</h1>
+  <p class="lede">Agents that plan, act, observe, and revise their strategy across many steps break the assumptions most HPC scheduling and workflow infrastructure was designed around. LHASA brings the supercomputing community into direct contact with that problem while it is still being defined.</p>
+  <div class="facts">
+    <span>1–4 March 2027</span>
+    <span>Singapore</span>
+    <span>Full day</span>
+    <span class="hot">Papers due 24 Nov 2026 (AoE)</span>
+  </div>
+</div>
+
+<section id="about" class="wrap">
+  <div class="sec-head"><span class="eyebrow">01</span><h2>Scope and motivation</h2></div>
+  <div class="prose">
+    <p>Agentic AI systems are moving from single-shot prediction toward sustained, long-horizon autonomy. In scientific discovery this shift is already visible: autonomous laboratories design, execute, and interpret experiments in closed loops; AI co-scientists traverse hypothesis generation, simulation, and validation; and multi-agent orchestration couples foundation models to solvers, databases, and physical instruments. The scientific reasoning is increasingly tractable. The systems and supercomputing substrate required to run these agents reliably over hours, days, and whole campaigns is not.</p>
+    <p>The scope of this workshop is the supercomputing and systems challenges that arise as a direct consequence of agentic, long-horizon operation, rather than specific science applications in isolation. A single agentic campaign interleaves large-model inference, classical simulation, data retrieval, and — in the autonomous-laboratory case — physical experiments, each with different latency, placement, and reservation requirements, and the composition changes dynamically as the agent decides what to do next. These workloads demand persistent state and memory that survive across steps and failures, orchestration across heterogeneous accelerators and facilities, fault tolerance measured over the lifetime of a campaign rather than a single job, provenance sufficient for a result to be trusted and reproduced, and human oversight inserted at the right points without stalling throughput.</p>
+    <p>We take the position that these are supercomputing problems first. Progress requires co-design across model developers, systems and scheduler researchers, facility operators, and the domain scientists whose loops the agents are meant to close. The workshop is deliberately cross-domain: we convene researchers working in the life sciences, materials, climate, and the physical sciences alongside the infrastructure teams at Asia-Pacific and international HPC centers, on the premise that the systems abstractions worth building are the ones that recur across all of these domains.</p>
+    <p>The Asia-Pacific setting is well matched to this agenda. The region operates several of the world's largest systems and is investing heavily in autonomous experimentation and AI-for-science platforms, and the centers co-organizing SupercomputingAsia are precisely the operators who will have to run agentic workloads in production. Our intent is that LHASA seeds a durable community and a shared research agenda — common benchmarks, failure modes, and interface conventions for agentic scientific computing — that outlasts a single meeting.</p>
+  </div>
+</section>
+
+<section id="topics" class="wrap">
+  <div class="sec-head"><span class="eyebrow">02</span><h2>Topics of interest</h2></div>
+  <div class="topics">
+    <div class="topic"><h3>Scheduling and resource management</h3><p>Reservations, co-scheduling, and placement for campaigns that interleave inference, simulation, and instrument time with a composition that changes at runtime.</p></div>
+    <div class="topic"><h3>Persistent state and agent memory</h3><p>State and memory that survive across steps, jobs, and failures, including checkpointing and recovery at campaign granularity.</p></div>
+    <div class="topic"><h3>Inference serving and orchestration</h3><p>Serving large models for sustained multi-step reasoning, batching and routing under agent-driven demand, and coupling models to solvers and databases.</p></div>
+    <div class="topic"><h3>Heterogeneous and federated execution</h3><p>Orchestration across accelerators, facilities, and edge instruments, and the movement of state between laboratories and central supercomputers.</p></div>
+    <div class="topic"><h3>Fault tolerance over campaigns</h3><p>Failure models and recovery semantics when the unit of work is a week-long investigation rather than a single job.</p></div>
+    <div class="topic"><h3>Provenance and reproducibility</h3><p>Recording agent decisions, tool calls, and data lineage in enough detail for a result to be trusted, audited, and reproduced.</p></div>
+    <div class="topic"><h3>Human oversight in the loop</h3><p>Inserting review and intervention at the right points without stalling throughput, and the interfaces that make oversight practical at scale.</p></div>
+    <div class="topic"><h3>Energy and cost accounting</h3><p>Attribution, budgeting, and accounting for long-running agentic workloads across mixed inference and simulation footprints.</p></div>
+    <div class="topic"><h3>Autonomous laboratories</h3><p>Closing design–build–test–learn loops on HPC, including instrument integration, queueing against physical resources, and safety interlocks.</p></div>
+    <div class="topic"><h3>Benchmarks and evaluation</h3><p>Workloads, metrics, and failure taxonomies for long-horizon agentic systems, and what a shared benchmark suite would need to capture.</p></div>
+  </div>
+</section>
+
+<section id="submit" class="wrap">
+  <div class="sec-head"><span class="eyebrow">03</span><h2>Submissions and important dates</h2></div>
+  <div class="prose">
+    <p>We invite full papers, short papers, and position or lightning papers. Submissions are managed through Linklings and reviewed by the program committee. Accepted papers appear in the SupercomputingAsia workshop proceedings, and we will invite extended versions of the strongest contributions to a follow-on journal special issue.</p>
+  </div>
+  <div class="dates">
+    <div class="date-row"><time datetime="2026-11-24">24 Nov 2026</time><span class="what">Paper submission deadline</span><span class="note">Anywhere on Earth.</span></div>
+    <div class="date-row"><time datetime="2026-12-08">8 Dec 2026</time><span class="what">Notification of acceptance</span></div>
+    <div class="date-row"><time datetime="2026-12-20">20 Dec 2026</time><span class="what">Camera-ready papers due</span></div>
+    <div class="date-row"><time datetime="2027-03-01">1–4 Mar 2027</time><span class="what">SupercomputingAsia 2027, Singapore</span><span class="note">Workshops are held on 1 and 4 March; the LHASA date will be confirmed by the conference.</span></div>
+  </div>
+</section>
+
+<section id="program" class="wrap">
+  <div class="sec-head"><span class="eyebrow">04</span><h2>Program structure</h2></div>
+  <div class="program">
+    <div class="slot"><span class="n">01</span><div><h3>Invited keynotes</h3><p>Two to three talks framing the systems challenges from the model, facility, and domain-science perspectives.</p></div></div>
+    <div class="slot"><span class="n">02</span><div><h3>Reviewed paper track</h3><p>Full and short papers presented orally.</p></div></div>
+    <div class="slot"><span class="n">03</span><div><h3>Lightning and position papers</h3><p>A fast session to surface early ideas and open problems.</p></div></div>
+    <div class="slot"><span class="n">04</span><div><h3>Closing panel</h3><p>“What does an operating system for agentic science look like?” — a foundation-model developer, a scheduler and systems researcher, an HPC facility operator, and a domain scientist, moderated by the organizers.</p></div></div>
+  </div>
+  <div class="prose" style="margin-top:22px">
+    <p>Invited perspectives under discussion cover inference orchestration and serving for long-horizon agents, closing design–build–test–learn loops in autonomous laboratories on HPC, scheduling heterogeneous agentic workloads from a facility-operations standpoint, and long-horizon agents in the life and materials sciences. After the workshop we will circulate a short community report drawn from the panel and the position papers, so that the meeting leaves a persistent set of open problems behind it.</p>
+  </div>
+</section>
+
+<section id="organizers" class="wrap">
+  <div class="sec-head"><span class="eyebrow">05</span><h2>Organizers</h2></div>
+  <div class="people">
+    <div class="person">
+      <h3>Arvind Ramanathan</h3>
+      <p class="aff">Argonne National Laboratory · University of Chicago</p>
+      <p>Computational Science Leader in the Data Science and Learning Division at Argonne, with a joint Senior Scientist appointment through the University of Chicago Consortium for Advanced Science and Engineering. His research develops biological foundation models and agentic AI systems for autonomous scientific discovery, including genome- and protein-scale language models and orchestrated platforms for autonomous laboratories across DOE facilities. He co-organizes the SciFM conference series on foundation models for science.</p>
+    </div>
+    <div class="person">
+      <h3>Geetika Gupta</h3>
+      <p class="aff">NVIDIA</p>
+      <p>Senior Director of Product Management at NVIDIA, working on products for applying AI to HPC, scientific research, and autonomous discovery. She holds an MBA from the Anderson School at UCLA and a bachelor's degree in mechanical engineering from IIT BHU.</p>
+    </div>
+    <div class="person">
+      <h3>Gautham Dharuman</h3>
+      <p class="aff">NVIDIA</p>
+      <p>Research scientist and engineer at NVIDIA with expertise in training large language models at scale on emerging exascale systems, focused on automated scientific discovery and on incorporating experimental feedback through reinforcement learning and preference optimization.</p>
+    </div>
+    <div class="person">
+      <h3>Nick Jones</h3>
+      <p class="aff">University of Auckland Waipapa Taumata Rau</p>
+      <p>Director of Digital Research Innovation and Artificial Intelligence at the University of Auckland, and founding director of the New Zealand eScience Infrastructure from 2011 to 2025. He has held advisory and governance roles across research and infrastructure organisations, including the Organisational Advisory Board of the Research Data Alliance and the board of the NZ SKA Alliance.</p>
+    </div>
+  </div>
+</section>
+
+<section id="pc" class="wrap">
+  <div class="sec-head"><span class="eyebrow">06</span><h2>Program committee</h2></div>
+  <div class="pc-list">
+    <ul>
+      <li>Ian Foster <span>Argonne National Laboratory · University of Chicago</span></li>
+      <li>Sergei Kalinin <span>University of Tennessee</span></li>
+      <li>Markus Buehler <span>MIT</span></li>
+      <li>Anima Anandkumar <span>Caltech</span></li>
+    </ul>
+    <div class="prose">
+      <p>Additional members are being confirmed, with regional representation from RIKEN, A*STAR/IHPC and NSCC Singapore, NCI Australia, and NeSI New Zealand, and industry membership from NVIDIA. We are targeting balance across the life, materials, and physical sciences and across model, systems, and facility expertise.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="wrap">
+  <div class="sec-head"><span class="eyebrow">07</span><h2>Contact</h2></div>
+  <div class="prose">
+    <p>Questions about scope, submissions, or participation can be directed to the organizers.</p>
+  </div>
+  <div class="contact">
+    <span class="mailbox" id="addr">ramanathana@anl.gov</span>
+    <button class="copy" id="copyBtn" type="button">Copy address</button>
+  </div>
+</section>
+
+<footer class="wrap">
+  <p>LHASA 2027 · Scaling Long-Horizon Agentic AI Systems for Scientific Discovery</p>
+  <p>A workshop proposed for SupercomputingAsia 2027, 1–4 March 2027, Singapore. Details are subject to confirmation by the conference organizing committee.</p>
+</footer>
+
+<script>
+(function(){
+  var btn=document.getElementById('copyBtn'),addr=document.getElementById('addr');
+  if(!btn||!addr)return;
+  btn.addEventListener('click',function(){
+    var text=addr.textContent.trim();
+    var done=function(){btn.textContent='Copied';setTimeout(function(){btn.textContent='Copy address';},1600);};
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done,select);
+    }else{select();}
+    function select(){
+      try{
+        var r=document.createRange();r.selectNodeContents(addr);
+        var s=window.getSelection();s.removeAllRanges();s.addRange(r);
+        btn.textContent='Press ⌘/Ctrl+C';
+        setTimeout(function(){btn.textContent='Copy address';},2200);
+      }catch(e){}
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
